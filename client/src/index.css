@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #14532d;
+  --color-primary-dark: #0e3d21;
+  --color-secondary: #16a34a;
+  --color-mint: #dcfce7;
+  --color-bg: #f8faf5;
+  --color-surface: #ffffff;
+  --color-line: #e5eadf;
+  --color-ink: #172b20;
+  --color-muted: #64748b;
+  --color-warn: #f59e0b;
+  --color-danger: #dc2626;
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Telugu', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --shadow-card: 0 1px 2px rgb(23 43 32 / 0.04), 0 4px 16px rgb(23 43 32 / 0.05);
+}
+
+html, body { background: var(--color-bg); color: var(--color-ink); -webkit-tap-highlight-color: transparent; }
+body { font-family: var(--font-sans); }
+.num { font-variant-numeric: tabular-nums; }
+.pb-safe { padding-bottom: max(env(safe-area-inset-bottom), 0.5rem); }
+
+@keyframes pulse-ring { 0% { transform: scale(1); opacity: .45 } 100% { transform: scale(1.6); opacity: 0 } }
+.ring-pulse::before, .ring-pulse::after { content: ''; position: absolute; inset: 0; border-radius: 9999px; background: var(--color-danger); animation: pulse-ring 1.6s ease-out infinite; z-index: -1; }
+.ring-pulse::after { animation-delay: .8s; }
