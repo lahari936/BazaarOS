@@ -22,7 +22,8 @@ if (!config.gnaniKey) console.warn('[config] GNANI_API_KEY missing: voice featur
 export let supportsTransactions = false;
 
 export async function connectDb(uri = config.mongoUri) {
-  await mongoose.connect(uri);
+  // dbName keeps Bazaar OS in its own database even on a cluster shared with other apps.
+  await mongoose.connect(uri, { dbName: process.env.MONGO_DB || 'bazaaros' });
   const hello = await mongoose.connection.db.admin().command({ hello: 1 });
   // Multi-document transactions need a replica set (Atlas always is). Standalone local mongod is not.
   supportsTransactions = Boolean(hello.setName || hello.msg === 'isdbgrid');

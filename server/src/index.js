@@ -30,4 +30,7 @@ app.use('/api', (_req, res) => res.status(404).json({ error: 'Not found' }));
 app.use(errorHandler);
 
 await connectDb();
-app.listen(config.port, () => console.log(`[api] http://localhost:${config.port}`));
+// Vercel runs the exported app as a function; Render/local need a listening server.
+if (!process.env.VERCEL) app.listen(config.port, () => console.log(`[api] http://localhost:${config.port}`));
+
+export default app;
